@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "/WEB-INF/classes/struts-2.1.7.dtd">
+
+<struts>
+
+    <constant name="struts.devMode" value="true" />
+
+    <package name="basicstruts2" extends="struts-default" namespace="/">
+
+        <!--
+        If no class attribute is specified the framework will assume success and
+        render the result index.jsp
+        If no name value for the result node is specified the success value is the default
+        -->
+        <action name="index">
+            <result>/WEB-INF/results/index.jsp</result>
+        </action>
+
+        <action name="">
+            <result>/WEB-INF/results/index.jsp</result>
+        </action>
+		
+        <!--
+        If the URL is hello.action the call the execute method of class HelloWorldAction.
+        If the result returned by the execute method is success render the HelloWorld.jsp
+        -->
+        <action name="hello" class="com.nabisoft.struts2.demo.action.HelloWorldAction" method="execute">
+            <result name="success">/WEB-INF/results/HelloWorld.jsp</result>
+            <result name="input">/WEB-INF/results/index.jsp</result>
+        </action>
+
+    </package>
+
+</struts>
