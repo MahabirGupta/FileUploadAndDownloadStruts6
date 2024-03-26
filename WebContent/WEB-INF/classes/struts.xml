@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE struts PUBLIC
     "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
-    "/WEB-INF/classes/struts-2.1.7.dtd">
+    "struts-2.1.7.dtd">
 
 <struts>
 
@@ -31,6 +31,31 @@
             <result name="input">/WEB-INF/results/index.jsp</result>
         </action>
 
+    </package>
+    
+    <package name="default" namespace="/" extends="struts-default">
+    
+    <interceptors>
+    <interceptor name="fileUpload" class="org.apache.struts2.interceptor.FileUploadInterceptor" />
+    <interceptor-stack name="fileUploadStack">
+        <interceptor-ref name="defaultStack" />
+        <interceptor-ref name="fileUpload" />
+    </interceptor-stack>
+	</interceptors>
+
+	<action name="uploadFile" class="com.nabisoft.struts2.demo.action.FileUploadAction" method="execute">
+    <interceptor-ref name="fileUploadStack" />
+    <result>/success.jsp</result>
+	</action>
+    
+    <!--      <action name="uploadFile" class="com.nabisoft.struts2.demo.action.HelloWorldAction" method="uploadFile">
+            <result type="redirect">download.jsp</result>
+        </action>-->
+        
+        <action name="downloadFile" class="com.nabisoft.struts2.demo.action.FileDownloadAction" method="downloadFile">
+            <!-- Logic to download the file -->
+            <result name="success">/success.jsp</result>
+        </action>
     </package>
 
 </struts>
